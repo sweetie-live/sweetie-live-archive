@@ -10,17 +10,16 @@ const VIDEOS = [
     tour: "",
     venue: "八王子Match Vox",
     setlist: [],
-    tweet: "https://x.com/sweetie_genki/status/2048060985173586291",
     flyer: "flyers/2026-06-20.jpg"
   },
   {
-    id: "dQw4w9WgXcQ",
-    date: "2026-05-10",
-    title: "ワンマンライブ「サンプル」",
-    tour: "SAMPLE TOUR 2026",
-    venue: "梅田Shangri-La",
-    setlist: ["曲名A", "曲名B", "曲名C"],
-    tweet: "https://twitter.com/jack/status/20",
+    id: "6dWBbJJGURU",
+    date: "2026-06-04",
+    title: "Etranger “Kishibe” Release TOUR 2026",
+    tour: "Etranger “Kishibe” Release TOUR 2026",
+    venue: "堺FANDANGO",
+    setlist: [],
+    tweet: "https://x.com/fandango_sakai/status/2061752948821221690",
     flyer: "flyers/sample.jpg"
   }
 ];
