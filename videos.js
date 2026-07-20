@@ -19,7 +19,7 @@ const VIDEOS = [
     title: "Etranger “Kishibe” Release TOUR 2026",
     tour: "",
     venue: "堺FANDANGO",
-    setlist: [],
+    setlist: ["1曲目:スジャータ", "2曲目:だからずっとドキドキワクワク", "3曲目:スジャータ", "4曲目:恋バナ", "5曲目:なみだなみだだよ", "6曲目:いい夢みてね"],
     tweet: "https://x.com/fandango_sakai/status/2061752948821221690",
     flyer: "flyers/sample.jpg"
   }
