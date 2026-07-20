@@ -4,6 +4,17 @@
    ============================================================ */
 const SHOWS = [
   {
+    date: "2026-06-20",
+    open: "15:30",
+    start: "16:00",
+    venue: "八王子Match Vox",
+    title: "やまぴーpre.「アイス将軍vol.15」",
+    price: "3,500円",
+    onsale: "2026-04-26",
+    ticket: "https://x.com/sweetie_genki/status/2048060985173586291?s=46",
+    note: "閃光少女\nバイバイ・ニーチェ\n寺田寛明\nかいじゅうと花束\nスウィーティ\nand more！"
+  },
+  {
     date: "2026-06-04",
     open: "18:30",
     start: "19:00",
