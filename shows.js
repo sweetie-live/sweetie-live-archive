@@ -4,6 +4,17 @@
    ============================================================ */
 const SHOWS = [
   {
+    date: "2026-07-31",
+    open: "18:30",
+    start: "19:00",
+    venue: "BAR TONE8.0 +BASEMENT GALLERY",
+    title: "おなじ街",
+    price: "2,000円+1D",
+    onsale: "2026-06-03",
+    ticket: "https://x.com/kakeochigokko/status/2062128111693816082?s=46",
+    flyer: "flyers/2026-07-31.jpeg"
+  },
+  {
     date: "2026-06-20",
     open: "15:30",
     start: "16:00",
