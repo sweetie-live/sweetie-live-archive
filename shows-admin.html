@@ -55,11 +55,23 @@ pre{margin-top:16px;background:var(--raise);border:1px solid var(--line);border-
 <label for="venue">会場</label>
 <input id="venue" placeholder="梅田Shangri-La">
 
+<label for="floor">階数・部屋番号(任意)</label>
+<input id="floor" placeholder="3F / B1 A-2号室 など">
+
+<label for="address">住所(任意)</label>
+<input id="address" placeholder="大阪市北区…">
+
+<label for="mapurl">GoogleマップURL(任意)</label>
+<input id="mapurl" placeholder="https://maps.app.goo.gl/... または https://www.google.com/maps/...">
+
 <label for="price">チケット価格</label>
 <input id="price" placeholder="前売 3,500円 / 当日 4,000円">
 
 <label for="onsale">チケット発売日</label>
 <input id="onsale" type="date">
+
+<label for="posted">告知投稿URL(任意)</label>
+<input id="posted" placeholder="X等の告知ポストのURL">
 
 <label for="ticket">チケット購入URL(任意)</label>
 <input id="ticket" placeholder="https://...">
@@ -118,7 +130,7 @@ DATA.forEach((s,i)=>{
 });
 $("entry").addEventListener("change", ()=>{
   const i=+$("entry").value;
-  const keys=["date","open","start","title","venue","price","onsale","ticket","flyer"];
+  const keys=["date","open","start","title","venue","price","onsale","posted","ticket","flyer","mapurl","address","floor"];
   if(i<0){ keys.forEach(k=>$(k).value=""); $("notetxt").value=""; return; }
   const s=DATA[i];
   keys.forEach(k=>$(k).value=s[k]||"");
@@ -136,14 +148,19 @@ function entryToText(s){
     `    price: ${j(s.price)}`,
     `    onsale: ${j(s.onsale)}`
   ];
+  if(s.posted) fields.push(`    posted: ${j(s.posted)}`);
   if(s.ticket) fields.push(`    ticket: ${j(s.ticket)}`);
   if(s.flyer) fields.push(`    flyer: ${j(s.flyer)}`);
+  if(s.mapurl) fields.push(`    mapurl: ${j(s.mapurl)}`);
+  if(s.address) fields.push(`    address: ${j(s.address)}`);
+  if(s.floor) fields.push(`    floor: ${j(s.floor)}`);
   if(s.note) fields.push(`    note: ${j(s.note)}`);
   return `  {\n${fields.join(",\n")}\n  }`;
 }
 const HEADER=`/* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
-   date / open / start / venue / title / price / onsale / ticket / flyer / note
+   date / open / start / venue / title / price / onsale
+   / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */`;
 
 function buildOutput(){
@@ -159,7 +176,9 @@ function buildOutput(){
     date:$("date").value, open:$("open").value.trim(), start:$("start").value.trim(),
     venue:$("venue").value.trim(), title:$("title").value.trim(),
     price:$("price").value.trim(), onsale:$("onsale").value,
-    ticket:$("ticket").value.trim(), flyer:$("flyer").value.trim(), note:$("notetxt").value.trim()
+    posted:$("posted").value.trim(), ticket:$("ticket").value.trim(), flyer:$("flyer").value.trim(),
+    mapurl:$("mapurl").value.trim(), address:$("address").value.trim(), floor:$("floor").value.trim(),
+    note:$("notetxt").value.trim()
   };
   const i=+$("entry").value;
   if(i>=0) DATA[i]=s; else DATA.unshift(s);

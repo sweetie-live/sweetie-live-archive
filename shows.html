@@ -56,6 +56,23 @@ main{max-width:760px;margin:0 auto;padding:24px}
 .body .venue{font-size:.9rem;color:var(--ink)}
 .body .venue::before{content:"▸ ";color:var(--amber-dim)}
 .body .times{font-family:var(--disp);font-size:.8rem;color:var(--ink-sub);letter-spacing:.05em;margin-top:6px}
+.detail-toggle{
+  margin-top:10px;background:transparent;border:1px solid var(--line);color:var(--ink-sub);
+  font-family:var(--body);font-size:.78rem;padding:5px 14px;border-radius:999px;cursor:pointer;
+}
+.detail-toggle:hover{color:var(--amber);border-color:var(--amber-dim)}
+.detail-toggle.open{color:var(--amber);border-color:var(--amber-dim)}
+.detail{margin-top:2px}
+.venue-info{margin-top:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:4px}
+.venue-info .floor{font-size:.85rem;color:var(--ink);margin-bottom:4px}
+.venue-info .addr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.venue-info .addr-text{font-size:.85rem;color:var(--ink-sub);flex:1;min-width:0}
+.addr-copy{background:transparent;border:1px solid var(--line);color:var(--ink-sub);font-family:var(--body);font-size:.72rem;padding:3px 10px;border-radius:4px;cursor:pointer;white-space:nowrap}
+.addr-copy:hover{color:var(--amber);border-color:var(--amber-dim)}
+.map-link{display:inline-block;margin-top:6px;font-size:.82rem;color:var(--amber);text-decoration:none}
+.map-link:hover{text-decoration:underline}
+.posted-link{font-size:.85rem;color:var(--amber);text-decoration:none;border:1px solid var(--amber-dim);padding:8px 16px;border-radius:4px}
+.posted-link:hover{background:rgba(240,160,60,.08)}
 .body .price{font-size:.85rem;color:var(--ink-sub);margin-top:6px}
 .body .onsale{font-size:.78rem;color:var(--ink-sub);margin-top:2px}
 .body .onsale.future{color:var(--amber)}
@@ -118,6 +135,7 @@ function card(s, isPast){
   const p=dateParts(s.date);
   const times=[s.open?`OPEN ${s.open}`:"", s.start?`START ${s.start}`:""].filter(Boolean).join(" / ");
   const onsaleFuture = s.onsale && s.onsale>todayStr;
+  const hasDetail = times||s.price||s.onsale||s.address||s.mapUrl||s.floor||s.posted||(!isPast&&s.ticket)||s.flyer||isPast||s.note;
   return `
   <article class="show ${isPast?"past":""}">
     <div class="date-box">
@@ -128,15 +146,25 @@ function card(s, isPast){
     <div class="body">
       ${s.title?`<div class="title">${esc(s.title)}</div>`:""}
       <div class="venue">${esc(s.venue)}</div>
-      ${times?`<div class="times">${times}</div>`:""}
-      ${s.price?`<div class="price">${esc(s.price)}</div>`:""}
-      ${s.onsale?`<div class="onsale ${onsaleFuture?"future":""}">チケット発売: ${esc(s.onsale.replace(/-/g,"."))}${onsaleFuture?" (予定)":""}</div>`:""}
-      <div class="actions">
-        ${!isPast && s.ticket?`<a class="btn-ticket" href="${esc(s.ticket)}" target="_blank" rel="noopener">チケット購入</a>`:""}
-        ${s.flyer?`<a class="flyer-link" href="#" data-flyer="${esc(s.flyer)}">告知画像</a>`:""}
-        ${isPast?`<a class="arch-link" href="index.html?q=${encodeURIComponent(s.venue)}">アーカイブで見る ›</a>`:""}
+      ${hasDetail?`<button class="detail-toggle" type="button">詳細を表示</button>`:""}
+      <div class="detail" hidden>
+        ${times?`<div class="times">${times}</div>`:""}
+        ${s.price?`<div class="price">${esc(s.price)}</div>`:""}
+        ${s.onsale?`<div class="onsale ${onsaleFuture?"future":""}">チケット発売: ${esc(s.onsale.replace(/-/g,"."))}${onsaleFuture?" (予定)":""}</div>`:""}
+        ${(s.address||s.mapUrl||s.floor)?`
+        <div class="venue-info">
+          ${s.floor?`<div class="floor">${esc(s.floor)}</div>`:""}
+          ${s.address?`<div class="addr"><span class="addr-text">${esc(s.address)}</span><button class="addr-copy" type="button" data-copy="${esc(s.address)}">コピー</button></div>`:""}
+          ${s.mapUrl?`<a class="map-link" href="${esc(s.mapUrl)}" target="_blank" rel="noopener">Googleマップで開く ›</a>`:""}
+        </div>`:""}
+        <div class="actions">
+          ${s.posted?`<a class="posted-link" href="${esc(s.posted)}" target="_blank" rel="noopener">告知投稿</a>`:""}
+          ${!isPast && s.ticket?`<a class="btn-ticket" href="${esc(s.ticket)}" target="_blank" rel="noopener">チケット購入</a>`:""}
+          ${s.flyer?`<a class="flyer-link" href="#" data-flyer="${esc(s.flyer)}">告知画像</a>`:""}
+          ${isPast?`<a class="arch-link" href="index.html?q=${encodeURIComponent(s.venue)}">アーカイブで見る ›</a>`:""}
+        </div>
+        ${s.note?`<div class="note">${esc(s.note)}</div>`:""}
       </div>
-      ${s.note?`<div class="note">${esc(s.note)}</div>`:""}
     </div>
   </article>`;
 }
@@ -154,6 +182,28 @@ function render(){
   main.innerHTML=html;
 }
 render();
+
+/* 詳細表示トグル */
+main.addEventListener("click",e=>{
+  const btn=e.target.closest(".detail-toggle");
+  if(!btn) return;
+  const detail=btn.nextElementSibling;
+  const open=detail.hidden;
+  detail.hidden=!open;
+  btn.classList.toggle("open",open);
+  btn.textContent=open?"詳細を閉じる":"詳細を表示";
+});
+
+/* 住所コピー */
+main.addEventListener("click",async e=>{
+  const btn=e.target.closest(".addr-copy");
+  if(!btn) return;
+  try{
+    await navigator.clipboard.writeText(btn.dataset.copy);
+    const old=btn.textContent; btn.textContent="コピー済み";
+    setTimeout(()=>btn.textContent=old,1500);
+  }catch{ btn.textContent="失敗"; }
+});
 
 /* 告知画像ライトボックス */
 const lb=document.createElement("div");
