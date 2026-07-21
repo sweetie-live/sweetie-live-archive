@@ -1,7 +1,7 @@
 /* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
-   date / open / start / end / act / calhour / calmin / venue
-   / title / setup / price / onsale / posted / ticket / flyer / mapurl / address / floor / note
+   date / open / start / end / act / calhour / calmin / venue / title / price / onsale
+   / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */
 const SHOWS = [
   {
@@ -12,6 +12,7 @@ const SHOWS = [
     title: "姫野光太郎×三国ヶ丘FUZZ pre.",
     price: "2,000円+1D（600円）",
     onsale: "2026-07-08",
+    setup: "かけおちごっこ",
     posted: "https://x.com/kakeochigokko/status/2074830207140442345?s=46",
     flyer: "flyers/2026-09-25.jpeg",
     mapurl: "https://maps.app.goo.gl/v29ihfTcMaKNE7a8A?g_st=ic",
@@ -22,11 +23,12 @@ const SHOWS = [
   {
     date: "2026-09-20",
     open: "12:30",
-    end: "18:00",
+    start: undefined,
     venue: "SPACE DOG!2nd",
     title: "風立つ、かもめ、あさひの献立2026",
     price: "0円+飲食チケット¥1000別途要",
     onsale: "2026-08-01",
+    end: "18:00",
     posted: "https://x.com/kondate_fes/status/2079159817311314415?s=46",
     ticket: "https://www.mimimi-syokudou.com/kondate-fes/",
     flyer: "flyers/2026-09-20.jpeg",
@@ -82,7 +84,7 @@ const SHOWS = [
     open: "18:30",
     start: "19:00",
     venue: "堺FANDANGO",
-    title: "Etranger \u201cKishibe\u201d Release TOUR 2026",
+    title: "Etranger “Kishibe” Release TOUR 2026",
     price: "前売 2,500円 / 当日 3,000円",
     onsale: "2026-07-01",
     setup: "バンドセット",
