@@ -14,6 +14,9 @@ const SHOWS = [
     onsale: "2026-07-08",
     posted: "https://x.com/kakeochigokko/status/2074830207140442345?s=46",
     flyer: "flyers/2026-09-25.jpeg",
+    mapurl: "https://maps.app.goo.gl/v29ihfTcMaKNE7a8A?g_st=ic",
+    address: "大阪府堺市堺区向陵中町４丁４−３２",
+    floor: "チボリビル1F",
     note: "KOTARO HIMENO & THE FUJIWARA BAND\nLiTT\nかけおちごっこ"
   },
   {
