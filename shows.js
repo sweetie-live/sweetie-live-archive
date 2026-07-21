@@ -20,6 +20,21 @@ const SHOWS = [
     note: "KOTARO HIMENO & THE FUJIWARA BAND\nLiTT\nかけおちごっこ"
   },
   {
+    date: "2026-09-20",
+    open: "12:30",
+    start: "18:00",
+    venue: "SPACE DOG!2nd",
+    title: "風立つ、かもめ、あさひの献立2026 -チャリティサーキット無料フェス-",
+    price: "0円+飲食チケット¥1000別途要",
+    onsale: "2026-08-01",
+    posted: "https://x.com/kondate_fes/status/2079159817311314415?s=46",
+    ticket: "https://www.mimimi-syokudou.com/kondate-fes/",
+    flyer: "flyers/2026-09-20.jpeg",
+    mapurl: "https://maps.app.goo.gl/4EeQRiR5SmCqpAE37?g_st=ic",
+    address: "〒651-0095 兵庫県神戸市中央区旭通３丁目５−６",
+    floor: "2F"
+  },
+  {
     date: "2026-08-22",
     open: "",
     start: "",
