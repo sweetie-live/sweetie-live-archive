@@ -76,6 +76,7 @@ const SHOWS = [
     price: "3,500円",
     onsale: "2026-04-26",
     act: "16:40",
+    setup: "アコースティック",
     posted: "https://x.com/sweetie_genki/status/2048060985173586291?s=46",
     mapurl: "https://maps.app.goo.gl/KUcBZCRbboBo5z9a7?g_st=ic",
     address: "〒192-0084 東京都八王子市三崎町２−７",
