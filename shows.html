@@ -135,7 +135,7 @@ function card(s, isPast){
   const p=dateParts(s.date);
   const times=[s.open?`OPEN ${s.open}`:"", s.start?`START ${s.start}`:""].filter(Boolean).join(" / ");
   const onsaleFuture = s.onsale && s.onsale>todayStr;
-  const hasDetail = times||s.price||s.onsale||s.address||s.mapUrl||s.floor||s.posted||(!isPast&&s.ticket)||s.flyer||isPast||s.note;
+  const hasDetail = times||s.price||s.onsale||s.address||s.mapurl||s.floor||s.posted||(!isPast&&s.ticket)||s.flyer||isPast||s.note;
   return `
   <article class="show ${isPast?"past":""}">
     <div class="date-box">
@@ -151,11 +151,11 @@ function card(s, isPast){
         ${times?`<div class="times">${times}</div>`:""}
         ${s.price?`<div class="price">${esc(s.price)}</div>`:""}
         ${s.onsale?`<div class="onsale ${onsaleFuture?"future":""}">チケット発売: ${esc(s.onsale.replace(/-/g,"."))}${onsaleFuture?" (予定)":""}</div>`:""}
-        ${(s.address||s.mapUrl||s.floor)?`
+        ${(s.address||s.mapurl||s.floor)?`
         <div class="venue-info">
           ${s.floor?`<div class="floor">${esc(s.floor)}</div>`:""}
           ${s.address?`<div class="addr"><span class="addr-text">${esc(s.address)}</span><button class="addr-copy" type="button" data-copy="${esc(s.address)}">コピー</button></div>`:""}
-          ${s.mapUrl?`<a class="map-link" href="${esc(s.mapUrl)}" target="_blank" rel="noopener">Googleマップで開く ›</a>`:""}
+          ${s.mapurl?`<a class="map-link" href="${esc(s.mapurl)}" target="_blank" rel="noopener">Googleマップで開く ›</a>`:""}
         </div>`:""}
         <div class="actions">
           ${s.posted?`<a class="posted-link" href="${esc(s.posted)}" target="_blank" rel="noopener">告知投稿</a>`:""}
