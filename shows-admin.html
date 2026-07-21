@@ -47,20 +47,37 @@ pre{margin-top:16px;background:var(--raise);border:1px solid var(--line);border-
 <div class="row">
   <div><label for="open">開場</label><input id="open" placeholder="18:00"></div>
   <div><label for="start">開演</label><input id="start" placeholder="18:30"></div>
+  <div><label for="end">終了(任意)</label><input id="end" placeholder="22:00"></div>
 </div>
+<p class="hint">開演と終了の両方を入れると、その範囲でカレンダー登録されます</p>
 <label for="act">スウィーティ出番(任意)</label>
 <input id="act" placeholder="20:15 など">
 
-<label for="caldur">カレンダー登録の長さ</label>
-<select id="caldur">
-  <option value="">自動(オープンあり=4時間 / 出番のみ=40分)</option>
-  <option value="20">出番から 20分</option>
-  <option value="30">出番から 30分</option>
-  <option value="40">出番から 40分</option>
-  <option value="50">出番から 50分</option>
-  <option value="60">出番から 60分</option>
+<label for="calhour">カレンダー登録の長さ(オープンありの場合)</label>
+<select id="calhour">
+  <option value="">自動(4時間)</option>
+  <option value="3">3時間</option>
+  <option value="4">4時間</option>
+  <option value="5">5時間</option>
+  <option value="6">6時間</option>
+  <option value="7">7時間</option>
+  <option value="8">8時間</option>
+  <option value="9">9時間</option>
+  <option value="10">10時間</option>
+  <option value="11">11時間</option>
+  <option value="12">12時間</option>
 </select>
-<p class="hint">オープン時間がある場合は自動で4時間。出番のみの場合の長さはここで指定(既定40分)</p>
+
+<label for="calmin">カレンダー登録の長さ(出番のみの場合)</label>
+<select id="calmin">
+  <option value="">自動(40分)</option>
+  <option value="20">20分</option>
+  <option value="30">30分</option>
+  <option value="40">40分</option>
+  <option value="50">50分</option>
+  <option value="60">60分</option>
+</select>
+<p class="hint">開演と終了の両方を入れた場合はその範囲が優先されます。オープンありの場合は上、出番時刻のみの場合は下が使われます</p>
 
 <label for="title">公演名</label>
 <input id="title" placeholder="ワンマン「タイトル」/ 対バン名など">
@@ -143,7 +160,7 @@ DATA.forEach((s,i)=>{
 });
 $("entry").addEventListener("change", ()=>{
   const i=+$("entry").value;
-  const keys=["date","open","start","act","caldur","title","venue","price","onsale","posted","ticket","flyer","mapurl","address","floor"];
+  const keys=["date","open","start","end","act","calhour","calmin","title","venue","price","onsale","posted","ticket","flyer","mapurl","address","floor"];
   if(i<0){ keys.forEach(k=>$(k).value=""); $("notetxt").value=""; return; }
   const s=DATA[i];
   keys.forEach(k=>$(k).value=s[k]||"");
@@ -161,8 +178,10 @@ function entryToText(s){
     `    price: ${j(s.price)}`,
     `    onsale: ${j(s.onsale)}`
   ];
+  if(s.end) fields.push(`    end: ${j(s.end)}`);
   if(s.act) fields.push(`    act: ${j(s.act)}`);
-  if(s.caldur) fields.push(`    caldur: ${j(s.caldur)}`);
+  if(s.calhour) fields.push(`    calhour: ${j(s.calhour)}`);
+  if(s.calmin) fields.push(`    calmin: ${j(s.calmin)}`);
   if(s.posted) fields.push(`    posted: ${j(s.posted)}`);
   if(s.ticket) fields.push(`    ticket: ${j(s.ticket)}`);
   if(s.flyer) fields.push(`    flyer: ${j(s.flyer)}`);
@@ -174,7 +193,7 @@ function entryToText(s){
 }
 const HEADER=`/* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
-   date / open / start / act / caldur / venue / title / price / onsale
+   date / open / start / end / act / calhour / calmin / venue / title / price / onsale
    / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */`;
 
@@ -189,7 +208,8 @@ function buildOutput(){
   }
   const s={
     date:$("date").value, open:$("open").value.trim(), start:$("start").value.trim(),
-    act:$("act").value.trim(), caldur:$("caldur").value,
+    end:$("end").value.trim(), act:$("act").value.trim(),
+    calhour:$("calhour").value, calmin:$("calmin").value,
     venue:$("venue").value.trim(), title:$("title").value.trim(),
     price:$("price").value.trim(), onsale:$("onsale").value,
     posted:$("posted").value.trim(), ticket:$("ticket").value.trim(), flyer:$("flyer").value.trim(),
