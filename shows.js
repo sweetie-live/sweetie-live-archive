@@ -9,7 +9,7 @@ const SHOWS = [
     open: "18:30",
     start: "19:00",
     venue: "三国ヶ丘FUZZ",
-    title: "姫野光太郎×三国ヶ丘FUZZ pre.",
+    title: "負犬宴会",
     price: "2,000円+1D（600円）",
     onsale: "2026-07-08",
     setup: "かけおちごっこ",
