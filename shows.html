@@ -85,6 +85,8 @@ main{max-width:760px;margin:0 auto;padding:24px}
 .body .onsale{font-size:.78rem;color:var(--ink-sub);margin-top:2px}
 .body .onsale.future{color:var(--amber)}
 .actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cal-btn{background:transparent;border:1px solid var(--amber-dim);color:var(--amber);font-family:var(--body);font-size:.82rem;padding:8px 16px;border-radius:4px;cursor:pointer}
+.cal-btn:hover{background:rgba(240,160,60,.08)}
 .btn-ticket{
   display:inline-block;background:var(--amber);color:#14121a;font-weight:700;font-size:.82rem;
   text-decoration:none;padding:8px 18px;border-radius:4px;
@@ -176,6 +178,7 @@ function card(s, isPast){
         <div class="actions">
           ${s.posted?`<a class="posted-link" href="${esc(s.posted)}" target="_blank" rel="noopener">告知投稿</a>`:""}
           ${!isPast && s.ticket?`<a class="btn-ticket" href="${esc(s.ticket)}" target="_blank" rel="noopener">チケット購入</a>`:""}
+          ${!isPast?`<button class="cal-btn" type="button" data-cal="${esc(s.date)}">カレンダーに追加</button>`:""}
           ${s.flyer?`<a class="flyer-link" href="#" data-flyer="${esc(s.flyer)}">告知画像</a>`:""}
           ${isPast?`<a class="arch-link" href="index.html?q=${encodeURIComponent(s.venue)}">アーカイブで見る ›</a>`:""}
         </div>
@@ -232,6 +235,76 @@ function render(){
 yearSel.addEventListener("change",render);
 monthSel.addEventListener("change",render);
 render();
+
+/* カレンダー(.ics)追加 */
+function pad(n){return String(n).padStart(2,"0")}
+function toICSDate(y,mo,d,h,mi){
+  /* JSTのローカル時刻をそのままフローティング時刻として書き出す(TZID指定) */
+  return `${y}${pad(mo)}${pad(d)}T${pad(h)}${pad(mi)}00`;
+}
+function parseHM(t){
+  if(!t) return null;
+  const m=String(t).match(/(\d{1,2}):(\d{2})/);
+  return m?{h:+m[1],mi:+m[2]}:null;
+}
+function buildICS(s){
+  const [y,mo,d]=s.date.split("-").map(Number);
+  let start, endMin; /* endMin: 開始からの分数 */
+  const open=parseHM(s.open), act=parseHM(s.act);
+  if(open){
+    start=open; endMin=240; /* オープンあり: 4時間 */
+  }else if(act){
+    start=act;
+    endMin=(s.caldur && +s.caldur>0)? +s.caldur : 40; /* 出番から。既定40分、フォーム指定があれば優先 */
+  }else{
+    /* 時刻情報なし: 終日予定 */
+    start=null;
+  }
+  let dtStart, dtEnd, allDay=false;
+  if(start){
+    dtStart=toICSDate(y,mo,d,start.h,start.mi);
+    let em=start.h*60+start.mi+endMin;
+    let ed=d, eh=Math.floor(em/60), emin=em%60;
+    if(eh>=24){ eh-=24; ed+=1; } /* 日跨ぎ簡易対応 */
+    dtEnd=toICSDate(y,mo,ed,eh,emin);
+  }else{
+    allDay=true;
+    dtStart=`${y}${pad(mo)}${pad(d)}`;
+    const nd=new Date(y,mo-1,d+1);
+    dtEnd=`${nd.getFullYear()}${pad(nd.getMonth()+1)}${pad(nd.getDate())}`;
+  }
+  const title=(s.title?s.title+" / ":"")+"スウィーティ";
+  const locParts=[s.venue, s.floor, s.address].filter(Boolean).join(" ");
+  const desc=[s.act?`スウィーティ出番 ${s.act}`:"", s.open?`OPEN ${s.open}`:"", s.start?`START ${s.start}`:"", s.mapurl?s.mapurl:""].filter(Boolean).join("\\n");
+  const dt=allDay
+    ? `DTSTART;VALUE=DATE:${dtStart}\r\nDTEND;VALUE=DATE:${dtEnd}`
+    : `DTSTART;TZID=Asia/Tokyo:${dtStart}\r\nDTEND;TZID=Asia/Tokyo:${dtEnd}`;
+  const uid=`${s.date}-${(s.venue||"").replace(/\s/g,"")}@sweetie-live`;
+  return [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//sweetie-live//schedule//JP","CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",`UID:${uid}`,
+    `DTSTAMP:${toICSDate(y,mo,d,0,0)}`,
+    dt,
+    `SUMMARY:${title}`,
+    locParts?`LOCATION:${locParts}`:"",
+    desc?`DESCRIPTION:${desc}`:"",
+    "END:VEVENT","END:VCALENDAR"
+  ].filter(Boolean).join("\r\n");
+}
+main.addEventListener("click",e=>{
+  const btn=e.target.closest(".cal-btn");
+  if(!btn) return;
+  const s=SHOWS.find(x=>x.date===btn.dataset.cal);
+  if(!s) return;
+  const ics=buildICS(s);
+  const blob=new Blob([ics],{type:"text/calendar;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=`sweetie_${s.date}.ics`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
 
 /* 詳細表示トグル */
 main.addEventListener("click",e=>{
