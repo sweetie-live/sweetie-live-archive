@@ -42,7 +42,8 @@ const SHOWS = [
     posted: "https://x.com/kakeochigokko/status/2062128111693816082?s=46",
     flyer: "flyers/2026-07-31.jpeg",
     mapurl: "https://maps.app.goo.gl/TkA6Vo78JyF9vZZu7?g_st=ic",
-    address: "大阪府大阪市中央区南新町１丁目１−１ ＥＸＡ南新町ビル 1F",
+    address: "大阪府大阪市中央区南新町１丁目１−１",
+    floor: "ＥＸＡ南新町ビル 1F",
     note: "RATFLAP\n川の石\nかけおちごっこ\nアタギケンスケ\n出店\nCham Cham\n無人古着家"
   },
   {
@@ -65,8 +66,6 @@ const SHOWS = [
     price: "前売 2,500円 / 当日 3,000円",
     onsale: "2026-07-01",
     posted: "https://x.com/fandango_sakai/status/2040303578435530936?s=46",
-    mapurl: "https://maps.app.goo.gl/TG84Ap1qMsGxZz2QA?g_st=ic",
-    address: "大阪府堺市堺区堺区戎島町５丁３",
     note: "Etrnger\nメガマサヒデ\nガリザベン\n秘密のコペカチータ\nスウィーティ (band set)"
   }
 ];
