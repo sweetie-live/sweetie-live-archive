@@ -1,6 +1,6 @@
 /* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
-   date / open / start / venue / title / price / onsale
+   date / open / start / act / venue / title / price / onsale
    / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */
 const SHOWS = [
@@ -27,6 +27,7 @@ const SHOWS = [
     title: "箕面の森の音楽会",
     price: "無料",
     onsale: "",
+    act: "17:10〜",
     posted: "https://x.com/sweetie_genki/status/2076680746081927528?s=46",
     mapurl: "https://maps.app.goo.gl/kiPGkmndD8bFzZ7c7?g_st=ic",
     address: "大阪府箕面市箕面公園２−２３"
