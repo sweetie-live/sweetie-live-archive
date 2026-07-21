@@ -70,7 +70,11 @@ const SHOWS = [
     title: "やまぴーpre.「アイス将軍vol.15」",
     price: "3,500円",
     onsale: "2026-04-26",
+    act: "16:40〜17:10",
     posted: "https://x.com/sweetie_genki/status/2048060985173586291?s=46",
+    mapurl: "https://maps.app.goo.gl/KUcBZCRbboBo5z9a7?g_st=ic",
+    address: "〒192-0084 東京都八王子市三崎町２−７",
+    floor: "ヨーロービル B1F",
     note: "閃光少女\nバイバイ・ニーチェ\n寺田寛明\nかいじゅうと花束\nスウィーティ\nand more！"
   },
   {
