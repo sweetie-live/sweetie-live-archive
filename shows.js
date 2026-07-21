@@ -1,7 +1,7 @@
 /* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
    date / open / start / end / act / calhour / calmin / venue
-   / title / price / onsale / posted / ticket / flyer / mapurl / address / floor / note
+   / title / setup / price / onsale / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */
 const SHOWS = [
   {
@@ -85,6 +85,7 @@ const SHOWS = [
     title: "Etranger \u201cKishibe\u201d Release TOUR 2026",
     price: "前売 2,500円 / 当日 3,000円",
     onsale: "2026-07-01",
+    setup: "バンドセット",
     posted: "https://x.com/fandango_sakai/status/2040303578435530936?s=46",
     note: "Etrnger\nメガマサヒデ\nガリザベン\n秘密のコペカチータ\nスウィーティ (band set)"
   }

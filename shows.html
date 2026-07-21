@@ -61,6 +61,11 @@ main{max-width:760px;margin:0 auto;padding:24px}
 .body .title{font-family:var(--serif);font-weight:700;font-size:1.15rem;margin-bottom:4px}
 .body .venue{font-size:.9rem;color:var(--ink)}
 .body .venue::before{content:"▸ ";color:var(--amber-dim)}
+.setup-row{margin-top:8px}
+.setup-badge{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.03em;padding:3px 11px;border-radius:999px;border:1px solid}
+.setup-aco{color:#7ec8e3;border-color:#3a6b82}
+.setup-band{color:#f0a03c;border-color:#8a6a3a}
+.setup-unit{color:#e39ec8;border-color:#82426b}
 .body .times{font-family:var(--disp);font-size:.8rem;color:var(--ink-sub);letter-spacing:.05em;margin-top:6px}
 .act-line{margin-top:4px}
 .act-time{color:var(--amber);font-weight:600}
@@ -125,6 +130,7 @@ footer{text-align:center;color:var(--ink-sub);font-size:.75rem;padding:32px;lett
 <div class="controls">
   <select id="year" aria-label="年で絞り込み"><option value="">すべての年</option></select>
   <select id="month" aria-label="月で絞り込み"><option value="">すべての月</option></select>
+  <select id="setup" aria-label="編成で絞り込み"><option value="">すべての編成</option></select>
   <span id="count"></span>
 </div>
 
@@ -141,6 +147,11 @@ const WD = ["日","月","火","水","木","金","土"];
 const todayStr = new Date().toLocaleDateString("sv-SE"); /* YYYY-MM-DD ローカル */
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function setupClass(v){
+  if(v.includes("アコ")) return "aco";
+  if(v.includes("かけおち")) return "unit";
+  return "band";
+}
 function dateParts(d){
   const [y,m,dd]=d.split("-");
   const wd=WD[new Date(+y,+m-1,+dd).getDay()];
@@ -163,6 +174,7 @@ function card(s, isPast){
     <div class="body">
       ${s.title?`<div class="title">${esc(s.title)}</div>`:""}
       <div class="venue">${esc(s.venue)}</div>
+      ${s.setup?`<div class="setup-row"><span class="setup-badge setup-${setupClass(s.setup)}">${esc(s.setup)}</span></div>`:""}
       ${hasDetail?`<button class="detail-toggle" type="button">詳細を表示</button>`:""}
       <div class="detail" hidden>
         ${times?`<div class="times">${times}</div>`:""}
@@ -188,15 +200,18 @@ function card(s, isPast){
   </article>`;
 }
 
-const yearSel=$("year"), monthSel=$("month"), count=$("count");
+const yearSel=$("year"), monthSel=$("month"), setupSel=$("setup"), count=$("count");
 
-/* フィルタ用プルダウン生成(全公演の年・月から) */
+/* フィルタ用プルダウン生成(全公演の年・月・編成から) */
 [...new Set(SHOWS.map(s=>s.date.slice(0,4)))].sort().reverse().forEach(y=>{
   yearSel.insertAdjacentHTML("beforeend",`<option>${y}</option>`);
 });
 for(let m=1;m<=12;m++){
   monthSel.insertAdjacentHTML("beforeend",`<option value="${String(m).padStart(2,"0")}">${m}月</option>`);
 }
+[...new Set(SHOWS.map(s=>s.setup).filter(Boolean))].forEach(v=>{
+  setupSel.insertAdjacentHTML("beforeend",`<option>${v}</option>`);
+});
 
 /* 月区切り付きでカード列を組み立てる */
 function withDividers(arr, isPast){
@@ -214,10 +229,11 @@ function withDividers(arr, isPast){
 }
 
 function render(){
-  const fy=yearSel.value, fm=monthSel.value;
+  const fy=yearSel.value, fm=monthSel.value, fs=setupSel.value;
   const match=s=>{
     if(fy && !s.date.startsWith(fy)) return false;
     if(fm && s.date.slice(5,7)!==fm) return false;
+    if(fs && s.setup!==fs) return false;
     return true;
   };
   const upcoming = SHOWS.filter(s=>s.date>=todayStr && match(s)).sort((a,b)=>a.date.localeCompare(b.date));
@@ -234,6 +250,7 @@ function render(){
 }
 yearSel.addEventListener("change",render);
 monthSel.addEventListener("change",render);
+setupSel.addEventListener("change",render);
 render();
 
 /* カレンダー(.ics)追加 */
@@ -294,6 +311,7 @@ function buildICS(s){
 
   /* タイトル: 出番記載時は「(イベント名)/スウィーティ (出番:時刻)」 */
   let title=(s.title?s.title+" / ":"")+"スウィーティ";
+  if(s.setup) title+=`(${s.setup})`;
   if(s.act) title+=` (出番:${s.act})`;
 
   const locParts=[s.venue, s.floor, s.address].filter(Boolean).join(" ");
