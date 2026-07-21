@@ -27,6 +27,7 @@ button{
   font-family:inherit;font-weight:700;font-size:.95rem;padding:12px 24px;cursor:pointer;
 }
 button.copy{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+button.danger{background:transparent;color:#ff6b6b;border:1px solid #7a3232}
 pre{
   margin-top:16px;background:var(--raise);border:1px solid var(--line);border-radius:4px;
   padding:16px;font-size:.8rem;overflow-x:auto;white-space:pre-wrap;word-break:break-all;
@@ -82,6 +83,7 @@ pre{
 
 <button id="gen">生成</button>
 <button id="save" class="copy">GitHubに保存</button>
+<button id="del" class="danger" hidden>この項目を削除</button>
 <button id="copy" class="copy" hidden>コピー</button><span id="msg"></span>
 <pre id="out" hidden></pre>
 
@@ -317,6 +319,43 @@ $("save").addEventListener("click", async ()=>{
     $("msg").textContent = "エラー: " + e.message;
   }finally{
     $("save").disabled = false;
+  }
+});
+
+/* 現在のDATA配列をそのまま videos.js の中身に文字列化(フォーム内容は足さない) */
+function serializeAll(){
+  return `${HEADER}\nconst VIDEOS = [\n${DATA.map(entryToText).join(",\n")}\n];\n`;
+}
+/* 削除ボタンの表示制御 */
+$("entry").addEventListener("change", ()=>{
+  $("del").hidden = (+$("entry").value < 0);
+});
+/* 削除実行 */
+$("del").addEventListener("click", async ()=>{
+  const i = +$("entry").value;
+  if(i < 0) return;
+  const label = $("entry").options[$("entry").selectedIndex].textContent;
+  if(!confirm(`「${label}」を削除します。よろしいですか?`)) return;
+  const conf = loadConf();
+  if(!conf.token || !conf.owner || !conf.repo){
+    $("msg").textContent = "先に下のGitHub連携設定を保存する";
+    $("ghset").open = true; return;
+  }
+  DATA.splice(i, 1);
+  const out = serializeAll();
+  $("del").disabled = true; $("save").disabled = true;
+  try{
+    $("msg").textContent = "videos.js を更新中…";
+    await ghPut(conf, "videos.js", btoa(unescape(encodeURIComponent(out))), `delete entry from videos.js`);
+    $("msg").textContent = "削除しました。数十秒でサイトに反映される。ページを再読み込みしてください";
+    /* プルダウンからも除去 */
+    $("entry").remove($("entry").selectedIndex);
+    $("entry").value = "-1";
+    $("del").hidden = true;
+  }catch(e){
+    $("msg").textContent = "エラー: " + e.message;
+  }finally{
+    $("del").disabled = false; $("save").disabled = false;
   }
 });
 
