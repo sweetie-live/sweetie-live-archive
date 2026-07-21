@@ -48,6 +48,8 @@ pre{margin-top:16px;background:var(--raise);border:1px solid var(--line);border-
   <div><label for="open">開場</label><input id="open" placeholder="18:00"></div>
   <div><label for="start">開演</label><input id="start" placeholder="18:30"></div>
 </div>
+<label for="act">スウィーティ出番(任意)</label>
+<input id="act" placeholder="20:15 など">
 
 <label for="title">公演名</label>
 <input id="title" placeholder="ワンマン「タイトル」/ 対バン名など">
@@ -130,7 +132,7 @@ DATA.forEach((s,i)=>{
 });
 $("entry").addEventListener("change", ()=>{
   const i=+$("entry").value;
-  const keys=["date","open","start","title","venue","price","onsale","posted","ticket","flyer","mapurl","address","floor"];
+  const keys=["date","open","start","act","title","venue","price","onsale","posted","ticket","flyer","mapurl","address","floor"];
   if(i<0){ keys.forEach(k=>$(k).value=""); $("notetxt").value=""; return; }
   const s=DATA[i];
   keys.forEach(k=>$(k).value=s[k]||"");
@@ -148,6 +150,7 @@ function entryToText(s){
     `    price: ${j(s.price)}`,
     `    onsale: ${j(s.onsale)}`
   ];
+  if(s.act) fields.push(`    act: ${j(s.act)}`);
   if(s.posted) fields.push(`    posted: ${j(s.posted)}`);
   if(s.ticket) fields.push(`    ticket: ${j(s.ticket)}`);
   if(s.flyer) fields.push(`    flyer: ${j(s.flyer)}`);
@@ -159,7 +162,7 @@ function entryToText(s){
 }
 const HEADER=`/* ============================================================
    ライブ予定データ:shows-admin.html で生成して丸ごと置き換える
-   date / open / start / venue / title / price / onsale
+   date / open / start / act / venue / title / price / onsale
    / posted / ticket / flyer / mapurl / address / floor / note
    ============================================================ */`;
 
@@ -174,6 +177,7 @@ function buildOutput(){
   }
   const s={
     date:$("date").value, open:$("open").value.trim(), start:$("start").value.trim(),
+    act:$("act").value.trim(),
     venue:$("venue").value.trim(), title:$("title").value.trim(),
     price:$("price").value.trim(), onsale:$("onsale").value,
     posted:$("posted").value.trim(), ticket:$("ticket").value.trim(), flyer:$("flyer").value.trim(),

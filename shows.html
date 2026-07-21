@@ -56,6 +56,8 @@ main{max-width:760px;margin:0 auto;padding:24px}
 .body .venue{font-size:.9rem;color:var(--ink)}
 .body .venue::before{content:"▸ ";color:var(--amber-dim)}
 .body .times{font-family:var(--disp);font-size:.8rem;color:var(--ink-sub);letter-spacing:.05em;margin-top:6px}
+.act-line{margin-top:4px}
+.act-time{color:var(--amber);font-weight:600}
 .detail-toggle{
   margin-top:10px;background:transparent;border:1px solid var(--line);color:var(--ink-sub);
   font-family:var(--body);font-size:.78rem;padding:5px 14px;border-radius:999px;cursor:pointer;
@@ -134,8 +136,9 @@ function dateParts(d){
 function card(s, isPast){
   const p=dateParts(s.date);
   const times=[s.open?`OPEN ${s.open}`:"", s.start?`START ${s.start}`:""].filter(Boolean).join(" / ");
+  const actLine = s.act?`<span class="act-time">スウィーティ出番 ${esc(s.act)}</span>`:"";
   const onsaleFuture = s.onsale && s.onsale>todayStr;
-  const hasDetail = times||s.price||s.onsale||s.address||s.mapurl||s.floor||s.posted||(!isPast&&s.ticket)||s.flyer||isPast||s.note;
+  const hasDetail = times||s.act||s.price||s.onsale||s.address||s.mapurl||s.floor||s.posted||(!isPast&&s.ticket)||s.flyer||isPast||s.note;
   return `
   <article class="show ${isPast?"past":""}">
     <div class="date-box">
@@ -149,6 +152,7 @@ function card(s, isPast){
       ${hasDetail?`<button class="detail-toggle" type="button">詳細を表示</button>`:""}
       <div class="detail" hidden>
         ${times?`<div class="times">${times}</div>`:""}
+        ${actLine?`<div class="times act-line">${actLine}</div>`:""}
         ${s.price?`<div class="price">${esc(s.price)}</div>`:""}
         ${s.onsale?`<div class="onsale ${onsaleFuture?"future":""}">チケット発売: ${esc(s.onsale.replace(/-/g,"."))}${onsaleFuture?" (予定)":""}</div>`:""}
         ${(s.address||s.mapurl||s.floor)?`
