@@ -90,6 +90,7 @@ const SHOWS = [
     title: "おなじ街",
     price: "2,000円+1D",
     onsale: "2026-06-03",
+    act: "20:45",
     setup: "かけおちごっこ",
     posted: "https://x.com/kakeochigokko/status/2062128111693816082?s=46",
     flyer: "flyers/2026-07-31.jpeg",
