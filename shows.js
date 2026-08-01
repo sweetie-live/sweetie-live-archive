@@ -79,7 +79,7 @@ const SHOWS = [
     act: "17:10",
     setup: "バンドセット",
     posted: "https://x.com/sweetie_genki/status/2076680746081927528?s=46",
-    mapurl: "https://maps.app.goo.gl/kiPGkmndD8bFzZ7c7?g_st=ic",
+    mapurl: "https://maps.app.goo.gl/ymyP5iYRYVZ2KLSc9?g_st=ic",
     address: "大阪府箕面市箕面公園２−２３"
   },
   {
