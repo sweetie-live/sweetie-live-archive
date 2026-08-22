@@ -71,6 +71,21 @@ const SHOWS = [
     note: "小雨決行"
   },
   {
+    date: "2026-09-04",
+    open: "17:00",
+    start: "17:30",
+    venue: "ODYSSEY",
+    title: "ODYSSEY 1歳お誕生日会",
+    price: "前売 2,000円/当日 2,500円",
+    onsale: "2026-08-22",
+    end: "23:00",
+    setup: "アコースティック",
+    posted: "https://x.com/umeda_odyssey/status/2090997391130300850?s=46",
+    flyer: "flyers/2026-09-04.jpeg",
+    mapurl: "https://maps.app.goo.gl/8EdpSkRgL3oytuY9A?g_st=ic",
+    address: "〒530-0057 大阪府大阪市北区曾根崎２丁目１−１２ ラ オカシオン B1F"
+  },
+  {
     date: "2026-08-22",
     open: "",
     start: "",
