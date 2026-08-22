@@ -14,6 +14,16 @@ const VIDEOS = [
     flyer: "flyers/2026-08-22.jpeg"
   },
   {
+    id: "o-zAlZrS6EU",
+    date: "2026-07-31",
+    title: "「おなじ街」谷町4丁目BAR TONE8.0+BASEMENT GALLERY",
+    tour: "",
+    venue: "谷町4丁目BAR TONE8.0",
+    setlist: ["キュンとして道づれ", "エンドレス♡パフェガール", "かけおちさせてよっ！", "恋の暴走機関車666", "天使to悪魔", "俗世捨て捨て倶楽部"],
+    tweet: "https://x.com/kakeochigokko/status/2062128111693816082?s=46",
+    flyer: "flyers/2026-07-31.jpeg"
+  },
+  {
     id: "qnuBuRXWd6w",
     date: "2026-06-20",
     title: "やまぴーpre.「アイス将軍vol.15」",
