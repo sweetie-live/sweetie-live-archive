@@ -44,6 +44,8 @@ const SHOWS = [
     price: "0円+飲食チケット¥1000別途要",
     onsale: "2026-08-01",
     end: "18:00",
+    act: "13:40",
+    calmin: "30",
     setup: "アコースティック",
     posted: "https://x.com/kondate_fes/status/2079159817311314415?s=46",
     ticket: "https://www.mimimi-syokudou.com/kondate-fes/",
