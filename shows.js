@@ -20,6 +20,18 @@ const SHOWS = [
     address: "大阪府大阪市浪速区日本橋４丁目１４−３"
   },
   {
+    date: "2026-10-12",
+    open: "16:30",
+    start: "17:00",
+    venue: "堺FANDANGO",
+    title: "堺FANDANGO 7周年記念",
+    price: "前売 2,400/当日 2,900円   +ドリンク",
+    onsale: "2026-09-14",
+    setup: "バンドセット",
+    posted: "https://x.com/sweetie_genki/status/2099354888857846028?s=46",
+    flyer: "flyers/2026-10-12.jpeg"
+  },
+  {
     date: "2026-09-25",
     open: "18:30",
     start: "19:00",
