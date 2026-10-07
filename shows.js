@@ -20,24 +20,6 @@ const SHOWS = [
     address: "大阪府大阪市浪速区日本橋４丁目１４−３"
   },
   {
-    date: "2026-12-27",
-    open: "15:00",
-    start: "15:30",
-    venue: "梅田 ODYSSEY",
-    title: "QLIP大感謝祭",
-    price: "adv ¥3,300 / door ¥3,300 +1drink ¥700",
-    onsale: "2026-10-05",
-    end: "22:00",
-    act: "16:00",
-    calmin: "20",
-    setup: "アコースティック",
-    posted: "https://x.com/weareqlip/status/2107033064874344466?s=46",
-    flyer: "flyers/2026-12-27.jpeg",
-    mapurl: "https://maps.app.goo.gl/yjJjFnyXhJHgzDHA8?g_st=ic",
-    address: "〒530-0057 大阪府大阪市北区曾根崎２丁目１−１２ ラ オカシオン",
-    floor: "B1F"
-  },
-  {
     date: "2026-10-12",
     open: "16:30",
     start: "17:00",
@@ -48,6 +30,24 @@ const SHOWS = [
     setup: "バンドセット",
     posted: "https://x.com/sweetie_genki/status/2099354888857846028?s=46",
     flyer: "flyers/2026-10-12.jpeg"
+  },
+  {
+    date: "2026-10-08",
+    open: "18:30",
+    start: "19:00",
+    venue: "歌う魚",
+    title: "ぷかぷかプール",
+    price: "adv/day  ¥3000(1d別)",
+    onsale: "2026-09-08",
+    end: "22:00",
+    calmin: "30",
+    setup: "アコースティック",
+    posted: "https://x.com/utausakana0901/status/2097293880349675950?s=46",
+    flyer: "flyers/2026-10-08.jpeg",
+    mapurl: "https://maps.app.goo.gl/GG2SQR9HeYQhsxQD6?g_st=ic",
+    address: "〒542-0083 大阪府大阪市中央区東心斎橋２丁目８−９ 日宝コア笠屋町",
+    floor: "4F",
+    note: "10/8(木)歌う魚\n『ぷかぷかプール』\nact)\n秘密のコペカチータ\nふるかわののこ(ザ・みゅ～)\nコシモトユイカ\nスウィーティ\nわをん(Rukka)\n\nopen/start  18:30/19:00\nadv/day  ¥3000(1d別)"
   },
   {
     date: "2026-09-25",
