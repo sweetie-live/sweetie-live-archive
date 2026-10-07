@@ -20,6 +20,24 @@ const SHOWS = [
     address: "大阪府大阪市浪速区日本橋４丁目１４−３"
   },
   {
+    date: "2026-12-27",
+    open: "15:00",
+    start: "15:30",
+    venue: "梅田 ODYSSEY",
+    title: "QLIP大感謝祭",
+    price: "adv ¥3,300 / door ¥3,300 +1drink ¥700",
+    onsale: "2026-10-05",
+    end: "22:00",
+    act: "16:00",
+    calmin: "20",
+    setup: "アコースティック",
+    posted: "https://x.com/weareqlip/status/2107033064874344466?s=46",
+    flyer: "flyers/2026-12-27.jpeg",
+    mapurl: "https://maps.app.goo.gl/yjJjFnyXhJHgzDHA8?g_st=ic",
+    address: "〒530-0057 大阪府大阪市北区曾根崎２丁目１−１２ ラ オカシオン",
+    floor: "B1F"
+  },
+  {
     date: "2026-10-12",
     open: "16:30",
     start: "17:00",
@@ -30,25 +48,6 @@ const SHOWS = [
     setup: "バンドセット",
     posted: "https://x.com/sweetie_genki/status/2099354888857846028?s=46",
     flyer: "flyers/2026-10-12.jpeg"
-  },
-  {
-    date: "2026-10-06",
-    open: "18:40",
-    start: "19:00",
-    venue: "ロフトプラスワンウエスト",
-    title: "第19回とんでもわーるど〜芸術の秋編〜",
-    price: "前売/当日 ¥2000+1オーダー",
-    onsale: "2026-09-28",
-    end: "22:00",
-    act: "19:30",
-    calmin: "30",
-    setup: "かけおちごっこ",
-    posted: "https://x.com/tondemohappun_/status/2104242153363001434?s=46",
-    ticket: "https://tiget.net/events/525926",
-    flyer: "flyers/2026-10-06.jpeg",
-    mapurl: "https://maps.app.goo.gl/PuDEX51Nt8KTXhmo9?g_st=ic",
-    address: "〒542-0084 大阪府大阪市中央区宗右衛門町２−３ 3F",
-    note: "タイムテーブル\n19:00 とんでもはっぷん！×かけおちごっこ コラボトーク\n19:30 かけおちごっこ\n20:05 とんでもはっぷん！\n20:40 エンディング\n20:50 終演後物販"
   },
   {
     date: "2026-09-25",
