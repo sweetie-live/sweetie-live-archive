@@ -20,6 +20,24 @@ const SHOWS = [
     address: "大阪府大阪市浪速区日本橋４丁目１４−３"
   },
   {
+    date: "2026-12-27",
+    open: "15:00",
+    start: "15:30",
+    venue: "梅田 ODYSSEY",
+    title: "QLIP大感謝祭",
+    price: "adv ¥3,300 / door ¥3,300 +1drink ¥700",
+    onsale: "2026-10-05",
+    end: "22:00",
+    act: "16:00",
+    calmin: "20",
+    setup: "アコースティック",
+    posted: "https://x.com/weareqlip/status/2107033064874344466?s=46",
+    flyer: "flyers/2026-12-27.jpeg",
+    mapurl: "https://maps.app.goo.gl/ZMjD2DDFDwu1dmzB8?g_st=ic",
+    address: "〒530-0057 大阪府大阪市北区曾根崎２丁目１−１２ ラ オカシオン",
+    floor: "B1F"
+  },
+  {
     date: "2026-10-12",
     open: "16:30",
     start: "17:00",
