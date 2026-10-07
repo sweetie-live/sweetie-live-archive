@@ -32,6 +32,25 @@ const SHOWS = [
     flyer: "flyers/2026-10-12.jpeg"
   },
   {
+    date: "2026-10-06",
+    open: "18:40",
+    start: "19:00",
+    venue: "ロフトプラスワンウエスト",
+    title: "第19回とんでもわーるど〜芸術の秋編〜",
+    price: "前売/当日 ¥2000+1オーダー",
+    onsale: "2026-09-28",
+    end: "22:00",
+    act: "19:30",
+    calmin: "30",
+    setup: "かけおちごっこ",
+    posted: "https://x.com/tondemohappun_/status/2104242153363001434?s=46",
+    ticket: "https://tiget.net/events/525926",
+    flyer: "flyers/2026-10-06.jpeg",
+    mapurl: "https://maps.app.goo.gl/PuDEX51Nt8KTXhmo9?g_st=ic",
+    address: "〒542-0084 大阪府大阪市中央区宗右衛門町２−３ 3F",
+    note: "タイムテーブル\n19:00 とんでもはっぷん！×かけおちごっこ コラボトーク\n19:30 かけおちごっこ\n20:05 とんでもはっぷん！\n20:40 エンディング\n20:50 終演後物販"
+  },
+  {
     date: "2026-09-25",
     open: "18:30",
     start: "19:00",
